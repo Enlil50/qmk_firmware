@@ -61,7 +61,7 @@ const key_override_t override_15 = ko_make_basic(MOD_MASK_ALT, KC_DQT, KC_GRV);
 const key_override_t override_17 = ko_make_basic(MOD_MASK_SHIFT, KC_LT, KC_GT);
 const key_override_t override_18 = ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_PMNS);
 
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
   &wheel_R_override,
   &wheel_L_override,
   &wheel_U_override,
