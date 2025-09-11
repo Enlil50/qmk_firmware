@@ -147,6 +147,7 @@ void ps2_host_init(void) {
                         PAL_RP_GPIO_OE |
                         PAL_RP_PAD_SLEWFAST |
                         PAL_RP_PAD_DRIVE12 |
+                        PAL_RP_PAD_PUE |
                         // Invert output enable so that pindirs=1 means input
                         // and indirs=0 means output. This way, out pindirs
                         // works correctly with the open-drain PS/2 interface.
