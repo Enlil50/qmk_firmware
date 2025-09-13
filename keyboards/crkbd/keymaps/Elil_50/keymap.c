@@ -53,7 +53,7 @@ void ps2_mouse_init_user() {
     // PS2_MOUSE_SEND(0xE2, "ptson: 0xE2"); //enable writing on the Trackpoint
     // PS2_MOUSE_SEND(0x47, "ptson: 0x47"); //enable writing on the Trackpoint
     // PS2_MOUSE_SEND(0x2C, "ptson: 0x2C"); // address
-    // PS2_MOUSE_SEND(0xFF, "ptson: 0xFF"); // value
+    // PS2_MOUSE_SEND(0x00, "ptson: 0x00"); // value
 }
 
 //    %--------------%
@@ -326,6 +326,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //alphabetic
                                   TD(META_TO6),  LEFT_TOGGLE, KC_LCTL, 	TD(TD_SHIFT_CAPS),  RIGHT_TOGGLE,  ESC_ALT
                                         //`--------------------------'  `--------------------------'
   ),
+
+
+
+  // ------------------------------ ADD ADDITIONAL LAYERS ONLY AFTER THESE LAYERS, for hyerarchy purposes ------------------------------
+
+
   
      [3] = LAYOUT_split_3x6_3( //vr_chat
       //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -353,7 +359,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //alphabetic
 
 
 
-  // ADD ADDITIONAL LAYERS ONLY BEFORE THESE LAYERS, for hyerarchy purposes
+  // ------------------------------ ADD ADDITIONAL LAYERS ONLY BEFORE THESE LAYERS, for hyerarchy purposes ------------------------------
+
+
 
   [MY_MAX_LAYER-1] = LAYOUT_split_3x6_3( // mouse transparent layer
       //,-----------------------------------------------------.                    ,-----------------------------------------------------.
