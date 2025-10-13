@@ -235,13 +235,13 @@ const uint32_t unicode_map[] PROGMEM = {
     [LRHO] = 0x03C1,
     [LSIGM] = 0x03C3,
     [LTAU] = 0x03C4,
-    [LUPSI] = 0x035A,
+    [LUPSI] = 0x03C5,
     [LPHI] = 0x03C6,
     [LCHI] = 0x03C7,
     [LPSI] = 0x03C8,
     [LOMEG] = 0x03C9,
 
-    [FSIGM] = 0x03FD,
+    [FSIGM] = 0x03C2,
   
     // other
     [LTEQ] = 0x2264, // less than or equal
