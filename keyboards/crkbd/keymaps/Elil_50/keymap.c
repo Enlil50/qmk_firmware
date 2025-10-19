@@ -562,10 +562,7 @@ const uint16_t PROGMEM combo088[] = {RIGHT_TOGGLE, KC_9, COMBO_END};
 const uint16_t PROGMEM combo089[] = {RIGHT_TOGGLE, KC_DLR , COMBO_END};
 const uint16_t PROGMEM combo090[] = {RIGHT_TOGGLE, KC_HASH, COMBO_END};
 const uint16_t PROGMEM combo091[] = {RIGHT_TOGGLE, KC_AMPR, COMBO_END};
-const uint16_t PROGMEM combo092[] = {RIGHT_TOGGLE, MY_RIGHTARR, COMBO_END};
 const uint16_t PROGMEM combo093[] = {RIGHT_TOGGLE, KC_QUES, COMBO_END};
-const uint16_t PROGMEM combo094[] = {RIGHT_TOGGLE, MY_INTEGR, COMBO_END};
-const uint16_t PROGMEM combo095[] = {RIGHT_TOGGLE, MY_EXIST, COMBO_END};
 const uint16_t PROGMEM combo096[] = {RIGHT_TOGGLE, KC_EQL, COMBO_END};
 const uint16_t PROGMEM combo097[] = {RIGHT_TOGGLE, MY_LESS, COMBO_END};
 const uint16_t PROGMEM combo098[] = {RIGHT_TOGGLE, KC_BSLS, COMBO_END};
@@ -674,6 +671,10 @@ const uint16_t PROGMEM combo0071[] = {LEFT_TOGGLE,TD(TD_SHIFT_CAPS), KC_S, COMBO
 const uint16_t PROGMEM combo0072[] = {LEFT_TOGGLE,TD(TD_SHIFT_CAPS), KC_T, COMBO_END};
 const uint16_t PROGMEM combo0075[] = {LEFT_TOGGLE,TD(TD_SHIFT_CAPS), KC_W, COMBO_END};
 
+const uint16_t PROGMEM combo094[] = {RIGHT_TOGGLE, MY_INTEGR, COMBO_END};
+const uint16_t PROGMEM combo095[] = {RIGHT_TOGGLE, MY_EXIST, COMBO_END};
+const uint16_t PROGMEM combo092[] = {RIGHT_TOGGLE, MY_RIGHTARR, COMBO_END};
+
 #endif
 
 combo_t key_combos[] = {
@@ -754,10 +755,7 @@ combo_t key_combos[] = {
   COMBO(combo089, KC_Z),
   COMBO(combo090, KC_X),
   COMBO(combo091, KC_C),
-  COMBO(combo092, KC_V),
   COMBO(combo093, KC_Y),
-  COMBO(combo094, KC_U),
-  COMBO(combo095, KC_I),
   COMBO(combo096, KC_O),
   COMBO(combo097, KC_P),
   COMBO(combo098, KC_H),
@@ -864,6 +862,10 @@ combo_t key_combos[] = {
   COMBO(combo0071, UM(SUB_6)),
   COMBO(combo0072, UM(SUB_4)),
   COMBO(combo0075, UM(SUB_1)),
+
+  COMBO(combo092, KC_V),
+  COMBO(combo094, KC_U),
+  COMBO(combo095, KC_I),
   #endif
 };
 
