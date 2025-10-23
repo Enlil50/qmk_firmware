@@ -22,7 +22,6 @@ ifeq ($(MY_TRACKPOINT_ENABLE),yes)
    POINTING_DEVICE_ENABLE = yes
    POINTING_DEVICE_DRIVER = ps2_mouse
    PS2_DRIVER = vendor
-   DEFERRED_EXEC_ENABLE = yes
    OPT_DEFS += -DMY_TRACKPOINT_ENABLE #define it in C files
 endif
 
