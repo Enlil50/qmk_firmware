@@ -49,6 +49,8 @@
 
 enum new_keys {
     ACCEL = SAFE_RANGE,
+    MY_RGB_BRIGHTU,
+    MY_RGB_BRIGHTD,
 };
 
 #define MY_LESS S(KC_COMM)
@@ -59,7 +61,6 @@ enum new_keys {
 #define ESC_ALT MT(MOD_LALT, KC_ESC)
 #define HOME_LCTL MT(MOD_LCTL, KC_HOME) // Double Tap: SCROLL_LAYER
 #define END_SHIFT MT(MOD_LSFT, KC_END) // Double Tap: CAPS_LOCK
-
 
 #if MY_UNICODE_ENABLE
     #define MY_INTEGR UM(INTEGR)
@@ -622,6 +623,7 @@ const uint16_t PROGMEM comboR[] = {HOME_LCTL, KC_RIGHT, COMBO_END};
 const uint16_t PROGMEM comboL[] = {HOME_LCTL, KC_LEFT, COMBO_END};
 const uint16_t PROGMEM comboU[] = {HOME_LCTL, KC_UP, COMBO_END};
 const uint16_t PROGMEM comboD[] = {HOME_LCTL, KC_DOWN, COMBO_END};
+const uint16_t PROGMEM combobright[] = {HOME_LCTL, MY_RGB_BRIGHTU, COMBO_END};
 
 #if MY_UNICODE_ENABLE
 const uint16_t PROGMEM combo36[] = {ESC_ALT, MY_LESS, COMBO_END};
@@ -822,6 +824,8 @@ combo_t key_combos[] = {
   COMBO(comboU, C(KC_UP)),
   COMBO(comboD, C(KC_DOWN)),
 
+  COMBO(combobright, MY_RGB_BRIGHTD),
+
   #if MY_UNICODE_ENABLE
   COMBO(combo36, UM(LTEQ)),
   COMBO(combo37, UM(NOTEQ)),
@@ -882,19 +886,30 @@ combo_t key_combos[] = {
 //    |  NEW KEY BEHAVIOUR  |
 //    %---------------------%
 
-// for cap lock
+// for caps lock
 static deferred_token my_token = INVALID_DEFERRED_TOKEN;
 uint32_t kc_end_callback(uint32_t trigger_time, void *cb_arg) {
     tap_code(KC_END);
     return false;
 }
+// for activate scroll layer
 static deferred_token my_token1 = INVALID_DEFERRED_TOKEN;
 uint32_t kc_home_callback(uint32_t trigger_time, void *cb_arg) {
     tap_code(KC_HOME);
     return false;
 }
 
+#define LEVEL(value) (uint8_t)(((uint16_t)value) * ((uint16_t)RGB_MATRIX_MAXIMUM_BRIGHTNESS) / ((uint16_t)255))
+static const uint8_t levels[] = {
+    LEVEL(16),
+    LEVEL(32),
+    LEVEL(64),
+    LEVEL(128),
+    LEVEL(255)
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
     switch (keycode) {
 
         case RIGHT_TOGGLE:
@@ -1000,6 +1015,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 accel = !accel;
             }
             break;
+
+        ///// ---------------------
+
+        case MY_RGB_BRIGHTD: // I don't like RM_VALU/D behaviour
+            if (record->event.pressed) {
+                uint8_t level = rgb_matrix_config.hsv.v;
+                for (int i = sizeof(levels) - 1; i >= 0; i--) {
+                    if (levels[i] < level) {
+                        level = levels[i];
+                        break;
+                    }
+                }
+                rgb_matrix_config.hsv.v = level;
+            }
+            return false;
+
+        case MY_RGB_BRIGHTU: // I don't like RM_VALU/D behaviour
+            if (record->event.pressed) {
+                uint8_t level = rgb_matrix_config.hsv.v;
+
+                if (get_mods() == MOD_BIT(KC_LCTL)) {
+                    for (int i = sizeof(levels) - 1; i >= 0; i--) {
+                        if (levels[i] < level) {
+                            level = levels[i];
+                            break;
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < sizeof(levels); i++) {
+                        if (levels[i] > level) {
+                            level = levels[i];
+                            break;
+                        }
+                    }
+                }
+
+                rgb_matrix_config.hsv.v = level;
+            }
+            return false;
+
     }
     return true;
 }
@@ -1039,7 +1094,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [2] = LAYOUT_split_3x6_3( //stuff
     //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_PWR,                      UG_TOGG,KC_PSCR,XXXXXXX,XXXXXXX,TG(ADD_LAYER+1),TG(ADD_LAYER),
+         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_PWR,                     KC_PSCR,RM_TOGG,MY_RGB_BRIGHTU,XXXXXXX,TG(ADD_LAYER+1),TG(ADD_LAYER),
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         KC_F6,    KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_BSPC,                TG_GREEK_LAYER, ACCEL,  KC_UP,  KC_BRIU,  KC_VOLU, KC_MUTE,
     //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
