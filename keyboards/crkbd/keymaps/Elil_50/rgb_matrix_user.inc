@@ -118,7 +118,7 @@ void starry_heatmap_increase(uint8_t row, uint8_t col, uint8_t increase_heat, ui
 bool STARRY_NIGHT(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
 
-    const uint8_t drop_ticks    = 28;
+    const uint8_t drop_ticks    = 26;
     const uint8_t max_intensity = rgb_matrix_config.hsv.v;
     const uint8_t decay_ticks   = 0xff / max_intensity;
 
